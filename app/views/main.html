@@ -24,7 +24,10 @@
 
 <div>
   <div ng-repeat="persoon in personen">
-    {{persoon.naam}}
-    
+    {{persoon.naam + persoon.ploeg.naam}}
+    <div ng-repeat="ploeg in ploegen">
+      {{ploeg}}
+      <button class="submit" ng-click="voegToe(persoon, ploeg)">Voeg toe</button>
+    </div>
   </div>
 </div>
