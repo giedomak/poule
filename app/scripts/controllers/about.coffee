@@ -8,7 +8,12 @@
  # Controller of the poule2App
 ###
 (angular.module('poule2App')
-  .controller 'AboutCtrl', ($scope, $firebase) ->
-    wedstrijdenRef = new Firebase "https://resplendent-fire-2516.firebaseio.com/wedstrijden"
-    $scope.wedstrijden = $firebase wedstrijdenRef
+  .controller 'AboutCtrl', ($scope, $rootScope, $firebase) ->
+    ploegenRef = new Firebase "https://resplendent-fire-2516.firebaseio.com/ploegen"
+    $firebase(ploegenRef).$bind($rootScope,"ploegen")
+#    $scope.ploegen = [{naam: "Henk"}]
+#    personen = angular.copy($rootScope.ploegenBind)
+    $scope.ploeg1 = {}
+    $scope.voegToe = (ploeg) ->
+      $rootScope.ploegen.push(ploeg)
 )

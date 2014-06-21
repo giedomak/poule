@@ -28,4 +28,5 @@ angular
         controller: 'AboutCtrl'
       .otherwise
         redirectTo: '/'
+  .run ($rootScope, $firebase) ->
 
