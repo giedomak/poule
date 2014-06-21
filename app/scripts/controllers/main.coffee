@@ -12,7 +12,7 @@ angular.module('poule2App')
     personenRef = new Firebase "https://resplendent-fire-2516.firebaseio.com/personen"
     ploegenRef = new Firebase "https://resplendent-fire-2516.firebaseio.com/ploegen"
     voorspellingenRef = new Firebase "https://resplendent-fire-2516.firebaseio.com/voorspellingen"
-    $scope.personen = $firebase personenRef
+    $firebase(personenRef).$bind($scope,"personen")
     $scope.ploegen = $firebase ploegenRef
     $scope.voegToe = (persoon, ploeg) ->
       console.log "aan het toevoegen"
