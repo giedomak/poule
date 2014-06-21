@@ -1,13 +1,18 @@
 
-  <div ng-repeat="wedstrijd in wedstrijden">
-    {{wedstrijd}}
+  <div ng-repeat="ploeg in ploegen">
+    {{ploeg.naam}}<br>
   </div>
 <div>
-  Nieuwe wedstrijd toevoegen:
-  {{ploegen}}
-  <select ng-model="ploeg1" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'>
+  {{ploegen2}}
+  {{ploegenRef}}
+  Nieuwe ploeg toevoegen:
+  {{newPloeg.naam}}
+  <input type='text' ng-model="newPloeg.naam"/>
+  <button type='submit' ng-click="voegToe()">Add</button>
+  
+  <!--<select ng-model="ploeg1" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'>-->
     <!--<option value="">Jaja</option>-->
-  </select><br>
+  <!--</select><br>-->
 <!--  Name: <input type="text" ng-model="user.name" /><br />
     E-mail: <input type="email" ng-model="user.email" /><br />
     Gender: <input type="radio" ng-model="user.gender" value="male" />male

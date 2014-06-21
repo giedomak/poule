@@ -24,9 +24,9 @@ angular
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
       .when '/about',
-        templateUrl: 'views/about.html'
+        templateUrl: 'views/ploegen.html'
         controller: 'AboutCtrl'
       .otherwise
         redirectTo: '/'
-  .run ($rootScope, $firebase) ->
+#  .run ($rootScope, $firebase) -> # Wanneer iets bij init gerund moet worden
 
