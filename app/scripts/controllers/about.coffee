@@ -11,7 +11,7 @@
   .controller 'AboutCtrl', ($scope, $rootScope, $firebase) ->
     ploegenRef = new Firebase "https://resplendent-fire-2516.firebaseio.com/ploegen"
     $firebase(ploegenRef).$bind($rootScope,"ploegen")
-#    $scope.ploegen = [{naam: "Henk"}] #test
+#    $scope.ploegen = [{naam: "Henk"}]
 #    personen = angular.copy($rootScope.ploegenBind)
     $scope.ploeg1 = {}
     $scope.voegToe = (ploeg) ->
