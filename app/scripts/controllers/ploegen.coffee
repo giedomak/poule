@@ -8,8 +8,8 @@
  # Controller of the poule2App
 ###
 angular.module('poule2App')
-  .controller 'AboutCtrl', ($scope, $rootScope, $firebase, $filter) ->
-    console.log "AboutCtrl init"
+  .controller 'PloegenCtrl', ($scope, $rootScope, $firebase, $filter) ->
+    console.log "PloegenCtrl init"
     $rootScope.curTab = "ploegen"
     
     $scope.voegToe = () ->

@@ -25,7 +25,7 @@ angular
         controller: 'MainCtrl'
       .when '/ploegen',
         templateUrl: 'views/ploegen.html'
-        controller: 'AboutCtrl'
+        controller: 'PloegenCtrl'
       .when '/wedstrijden',
         templateUrl: 'views/wedstrijden.html'
         controller: 'WedstrijdenCtrl'
