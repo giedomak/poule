@@ -23,10 +23,17 @@ angular
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
-      .when '/about',
+      .when '/ploegen',
         templateUrl: 'views/ploegen.html'
         controller: 'AboutCtrl'
+      .when '/wedstrijden',
+        templateUrl: 'views/wedstrijden.html'
+        controller: 'WedstrijdenCtrl'
       .otherwise
         redirectTo: '/'
-#  .run ($rootScope, $firebase) -> # Wanneer iets bij init gerund moet worden
+#  .controller 'IndexCtrl', ($scope, $rootScope, $firebase, $filter) ->
+#    $rootScope.curTab = "
+  .run ($rootScope, $firebase) -> # Wanneer iets bij init gerund moet worden
+    $rootScope.ploegenRef = new Firebase "https://resplendent-fire-2516.firebaseio.com/ploegen"
+    $firebase($rootScope.ploegenRef).$bind($rootScope,"ploegen")
 

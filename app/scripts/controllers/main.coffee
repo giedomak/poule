@@ -9,6 +9,9 @@
 ###
 angular.module('poule2App')
   .controller 'MainCtrl', ($scope, $rootScope, $firebase) ->
+    console.log "MainCtrl init"
+    $rootScope.curTab = "main"
+    
     voorspellingenRef = new Firebase "https://resplendent-fire-2516.firebaseio.com/voorspellingen"
     personenRef = new Firebase "https://resplendent-fire-2516.firebaseio.com/personen"
     $firebase(personenRef).$bind($scope,"personenBind") # Deze wordt in sync gehouden met de db

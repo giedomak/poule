@@ -1,12 +1,9 @@
 
-  <div ng-repeat="ploeg in ploegen">
-    {{ploeg.naam}}<br>
+  <div ng-repeat="(key,ploeg) in ploegen">
+    {{ploeg.naam}} <span class="glyphicon glyphicon-trash" ng-click="verwijder(key)"></span><br>
   </div>
 <div>
-  {{ploegen2}}
-  {{ploegenRef}}
   Nieuwe ploeg toevoegen:
-  {{newPloeg.naam}}
   <input type='text' ng-model="newPloeg.naam"/>
   <button type='submit' ng-click="voegToe()">Add</button>
   

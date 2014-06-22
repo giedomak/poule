@@ -8,9 +8,9 @@
  # Controller of the poule2App
 ###
 angular.module('poule2App')
-  .controller 'AboutCtrl', ($scope, $rootScope, $firebase, $filter) ->
-    console.log "AboutCtrl init"
-    $rootScope.curTab = "ploegen"
+  .controller 'WedstrijdenCtrl', ($scope, $rootScope, $firebase, $filter) ->
+    console.log "WedstrijdenCtrl init"
+    $rootScope.curTab = "wedstrijden"
     
     $scope.voegToe = () ->
       console.log "ploeg toevoegen"
