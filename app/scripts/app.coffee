@@ -34,6 +34,15 @@ angular
 #  .controller 'IndexCtrl', ($scope, $rootScope, $firebase, $filter) ->
 #    $rootScope.curTab = "
   .run ($rootScope, $firebase) -> # Wanneer iets bij init gerund moet worden
-    $rootScope.ploegenRef = new Firebase "https://resplendent-fire-2516.firebaseio.com/ploegen"
-    $firebase($rootScope.ploegenRef).$bind($rootScope,"ploegen")
+    $rootScope.loading = true
+    
+    $rootScope.ploegenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/ploegen")
+    $rootScope.ploegenRef.$bind($rootScope,"ploegen")
+    
+    $rootScope.wedstrijdenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/wedstrijden")
+    $rootScope.wedstrijdenRef.$bind($rootScope,"wedstrijden")
+    
+    $rootScope.wedstrijdenRef.$on("loaded", () ->
+      $rootScope.loading = false
+    )
 

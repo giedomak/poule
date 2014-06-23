@@ -1,1 +1,21 @@
-Wedstrijden
+<div ng-show="loading">
+
+  Loading...<br><br>
+
+</div>
+
+<div ng-hide='loading'>
+  <div ng-repeat="(key, wedstrijd) in wedstrijden">
+    <!--{{wedstrijd}}-->
+    {{ wedstrijd.ploeg1.naam + " - " + wedstrijd.ploeg2.naam}} <a href=''><span class="glyphicon glyphicon-trash" ng-click="verwijder(key)"></span></a><br>
+  </div>
+  <br>
+  <form class='form-inline'>
+    Wedstrijd toevoegen:
+    <select class='form-control' ng-model="newWedstrijd.ploeg1" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'></select>
+    -
+    <select class='form-control' ng-model="newWedstrijd.ploeg2" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'></select>
+    <button ng-click="voegToe()" class="btn btn-default">Add</button>
+  </form>
+  <br>
+</div>

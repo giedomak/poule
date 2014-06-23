@@ -14,10 +14,8 @@ angular.module('poule2App')
     
     $scope.voegToe = () ->
       console.log "ploeg toevoegen"
-      newPloegRef = $rootScope.ploegenRef.push()
-      newPloegRef.set($scope.newPloeg)
+      newPloegRef = $rootScope.ploegen.$add($scope.newPloeg)
       
     $scope.verwijder = (ploeg) ->
       console.log "ploeg verwijderen"
-      console.log ploeg
-      $rootScope.ploegenRef.child(ploeg).remove()
+      $rootScope.ploegen.$remove(ploeg)
