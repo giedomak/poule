@@ -45,9 +45,11 @@ angular
     $rootScope.wedstrijdenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/wedstrijden")
     $rootScope.wedstrijdenRef.$bind($rootScope,"wedstrijden")
     
-    $rootScope.personen = {}
     $rootScope.personenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/personen")
     $rootScope.personenRef.$bind($rootScope,"personen")
+    
+    $rootScope.voorspellingenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/voorspellingen")
+    $rootScope.voorspellingenRef.$bind($rootScope,"voorspellingen")
     
     $rootScope.wedstrijdenRef.$on("loaded", () ->
       $rootScope.loading = false

@@ -1,16 +1,43 @@
 <div>
   <ul class="nav nav-pills">
-      <li ng-class="{'active': selectedPersoon === persoon}" ng-repeat='(key,persoon) in personen'>
-        <a href='' ng-click='select(key)'>
-          {{persoon.naam}} 
-        </a>
-      </li>
+    <li ng-class="{'active': selectedPersoon.$id === key}" ng-repeat='(key,persoon) in personen'>
+      <a href='' ng-click='select(key)'>
+        {{persoon.naam}} 
+      </a>
+    </li>
 
   </ul>
-  
+
   <div ng-show='selectedPersoon'>
-    Persoon selected {{selectedPersoon}}
-    <span class="glyphicon glyphicon-trash" ng-click="verwijder()"></span>
+    <br>
+    <h4>{{selectedPersoon.naam}}'s voorspellingen</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Ploeg1</th>
+          <th>Ploeg2</th>
+          <th>Uitslag</th>
+          <th>Voorspelling</th>
+        </tr>
+      </thead>
+
+      <tr ng-repeat="(key, wedstrijd) in wedstrijden">
+        <td>{{wedstrijd.ploeg1.naam}}</td>
+        <td>{{wedstrijd.ploeg2.naam}}</td>
+        <td>
+          <div ng-show="wedstrijd.gespeeld">
+            {{wedstrijd.scorePloeg1 + " - " + wedstrijd.scorePloeg2}}
+          </div>
+        </td>
+        <td>
+          <form class='form-inline'>
+            <input min='0' ng-model="personen[selectedPersoon.$id].voorspellingen[key].score1" class='form-control' style='width: 70px;' type='number'/> - 
+            <input min='0' ng-model="personen[selectedPersoon.$id].voorspellingen[key].score2" class='form-control' style='width: 70px;' type='number'/>
+          </form>
+        </td>
+      </tr>
+    </table>
+    Verwijder {{selectedPersoon.naam}} <a href=''><span class="glyphicon glyphicon-trash" ng-click="verwijder()"></span></a>
   </div>
 
   <div>
