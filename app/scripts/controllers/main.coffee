@@ -14,4 +14,3 @@ angular.module('poule2App')
     
     $scope.punten = (key) ->
       3
-    

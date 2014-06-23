@@ -16,16 +16,14 @@ angular.module('poule2App')
     
     $scope.select = (key) ->
       $rootScope.selectedPersoon = $rootScope.personen.$child key
+      console.log "Persoon selected ",$rootScope.selectedPersoon.naam
       ref = $rootScope.wedstrijden.$getIndex()
-      console.log ref
       ref.forEach( (key2, i) ->
 #        console.log(i, $rootScope.wedstrijden[key2]);
 #        name = child.name()
         $scope.wed[key2] = { score1: 3}
         $rootScope.personen[key].voorspellingen = $rootScope.personen[key].voorspellingen || {}
-        console.log $rootScope.personen[key]
         $rootScope.personen[key].voorspellingen[key2] = $rootScope.personen[key].voorspellingen[key2] || {score1:0, score2:0}
-        console.log $rootScope.personen[key]
       )
       
     
