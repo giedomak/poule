@@ -1,0 +1,25 @@
+<div>
+  <ul class="nav nav-pills">
+      <li ng-class="{'active': selectedPersoon === persoon}" ng-repeat='(key,persoon) in personen'>
+        <a href='' ng-click='select(key)'>
+          {{persoon.naam}} 
+        </a>
+      </li>
+
+  </ul>
+  
+  <div ng-show='selectedPersoon'>
+    Persoon selected {{selectedPersoon}}
+    <span class="glyphicon glyphicon-trash" ng-click="verwijder()"></span>
+  </div>
+
+  <div>
+    <br>
+    <form class='form-inline'>
+      Nieuwe persoon toevoegen: <input type='text' class="form-control" ng-model="newPersoon.naam"/>
+      <button type='submit' class="btn btn-default" ng-click="voegToe()">Add</button>
+    </form>
+    <br>
+  </div>
+
+</div>

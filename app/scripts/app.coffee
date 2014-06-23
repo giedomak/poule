@@ -23,6 +23,9 @@ angular
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
+      .when '/personen',
+        templateUrl: 'views/personen.html'
+        controller: 'PersonenCtrl'
       .when '/ploegen',
         templateUrl: 'views/ploegen.html'
         controller: 'PloegenCtrl'
@@ -41,6 +44,10 @@ angular
     
     $rootScope.wedstrijdenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/wedstrijden")
     $rootScope.wedstrijdenRef.$bind($rootScope,"wedstrijden")
+    
+    $rootScope.personen = {}
+    $rootScope.personenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/personen")
+    $rootScope.personenRef.$bind($rootScope,"personen")
     
     $rootScope.wedstrijdenRef.$on("loaded", () ->
       $rootScope.loading = false
