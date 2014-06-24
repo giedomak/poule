@@ -16,7 +16,7 @@ angular.module('poule2App')
     
     $scope.select = (key) ->
       $rootScope.selectedPersoon = $rootScope.personen.$child key
-      console.log "Persoon selected ",$rootScope.selectedPersoon.naam
+      console.log "Persoon selected: ",$rootScope.selectedPersoon.naam
       ref = $rootScope.wedstrijden.$getIndex()
       ref.forEach( (key2, i) ->
 #        console.log(i, $rootScope.wedstrijden[key2]);

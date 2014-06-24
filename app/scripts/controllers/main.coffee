@@ -12,5 +12,19 @@ angular.module('poule2App')
     console.log "MainCtrl init"
     $rootScope.curTab = "main"
     
-    $scope.punten = (key) ->
-      3
+    $scope.punten = (key_persoon) ->
+      punten = 0
+      for key_voorspelling, voorspelling of $rootScope.personen[key_persoon].voorspellingen# when voorspelling.score1
+        for key_wedstrijd, wedstrijd of $rootScope.wedstrijden
+          if key_voorspelling == key_wedstrijd
+            if winst(wedstrijd, voorspelling)
+              punten += 5
+            if gelijk(wedstrijd, voorspelling)
+              punten += 1
+      punten
+    
+    winst = (wedstrijd, voorspelling) ->
+      false
+      
+    gelijk = (wedstrijd, voorspelling) ->
+      true
