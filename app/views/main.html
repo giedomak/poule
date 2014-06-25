@@ -5,14 +5,15 @@
 <br>
 
 <h4>Chatbox</h4>
-<div ng-repeat="chat in chats">{{chat.naam + ": " + chat.bericht}}</div>
 <form class="form-inline">
-  <input class="form-control" type="text" placeholder="Afzender" ng-model="chats.newChat.naam"/>
-  <input class="form-control" type="text" placeholder="Chatbericht" ng-model="chats.newChat.bericht"/>
+  <input class="form-control" type="text" placeholder="Afzender" ng-model="newChat.naam"/>
+  <input class="form-control" type="text" placeholder="Chatbericht" ng-model="newChat.bericht"/>
   <button class="btn btn-default" ng-click="addChat()">Chat!</button>
 </form>
-
-
+<br>
+<div ng-show="newChat">{{newChat.naam + ": " + newChat.bericht}}</div>
+<div ng-repeat="chat in chats | orderByPriority | reverse">{{chat.naam + ": " + chat.bericht}}</div>
+<br>
 
 
 
