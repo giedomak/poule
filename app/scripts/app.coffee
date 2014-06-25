@@ -54,6 +54,9 @@ angular
     $rootScope.voorspellingenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/voorspellingen")
     $rootScope.voorspellingenRef.$bind($rootScope,"voorspellingen")
     
+    $rootScope.chatsRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/chats")
+    $rootScope.chatsRef.$bind($rootScope,"chats").then console.log "chats gebind"
+    
     $rootScope.punten = (wedstrijd, voorspelling) ->
       $punten = 0
       if winst(wedstrijd, voorspelling)

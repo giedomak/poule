@@ -20,3 +20,9 @@ angular.module('poule2App')
             $punten += $rootScope.punten(wedstrijd, voorspelling)
             
       $punten
+      
+    $scope.addChat = () ->
+      chat = $rootScope.chats.newChat
+      $rootScope.chatsRef.$add(chat).then ->
+        $rootScope.chats.newChat = {}
+    
