@@ -14,6 +14,11 @@ td {
   vertical-align: middle !important;
 }
 
+html {
+  /* Site structure not moving around when scrollbar comes around */
+  overflow-y: scroll;
+}
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
