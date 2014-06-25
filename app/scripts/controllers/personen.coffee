@@ -8,11 +8,14 @@
  # Controller of the poule2App
 ###
 angular.module('poule2App')
-  .controller 'PersonenCtrl', ($scope, $rootScope, $firebase) ->
+  .controller 'PersonenCtrl', ($scope, $rootScope, $firebase, $routeParams, $filter) ->
     console.log "PersonenCtrl init"
     $rootScope.curTab = "personen"
     $scope.wed = {}
     
+    $rootScope.personenRef.$on "loaded", () ->
+      if $routeParams.naam
+        ($scope.select(persoon.$id)) for persoon in ($filter('orderByPriority')($rootScope.personen)) when $filter('lowercase')(persoon.naam) is $filter('lowercase')($routeParams.naam)
     
     $scope.select = (key) ->
       $rootScope.selectedPersoon = $rootScope.personen.$child key
@@ -36,6 +39,9 @@ angular.module('poule2App')
       console.log $rootScope.selectedPersoon
       $rootScope.personenRef.$remove($rootScope.selectedPersoon.$id)
       $rootScope.selectedPersoon = null
-    
-    $scope.scorePloeg1 = () ->
-      8
+      
+    $scope.puntenWedstrijd = (key, wedstrijd) ->
+      if $rootScope.selectedPersoon && wedstrijd.gespeeld
+        return $rootScope.punten(wedstrijd, $rootScope.personen[$rootScope.selectedPersoon.$id].voorspellingen[key])
+      else 
+        return 0

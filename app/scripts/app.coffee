@@ -26,6 +26,9 @@ angular
       .when '/personen',
         templateUrl: 'views/personen.html'
         controller: 'PersonenCtrl'
+      .when '/personen/:naam',
+        templateUrl: 'views/personen.html'
+        controller: 'PersonenCtrl'
       .when '/ploegen',
         templateUrl: 'views/ploegen.html'
         controller: 'PloegenCtrl'
@@ -51,6 +54,20 @@ angular
     $rootScope.voorspellingenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/voorspellingen")
     $rootScope.voorspellingenRef.$bind($rootScope,"voorspellingen")
     
+    $rootScope.punten = (wedstrijd, voorspelling) ->
+      $punten = 0
+      if winst(wedstrijd, voorspelling)
+        $punten += 5
+      if gelijk(wedstrijd, voorspelling)
+        $punten += 1
+      $punten
+    
+    winst = (wedstrijd, voorspelling) ->
+      ((wedstrijd.scorePloeg1 > wedstrijd.scorePloeg2 && voorspelling.score1 > voorspelling.score2) || (wedstrijd.scorePloeg1 < wedstrijd.scorePloeg2 && voorspelling.score1 < voorspelling.score2))
+
+    gelijk = (wedstrijd, voorspelling) ->
+      wedstrijd.scorePloeg1 == wedstrijd.scorePloeg2 && voorspelling.score1 == voorspelling.score2
+      
     $rootScope.wedstrijdenRef.$on("loaded", () ->
       $rootScope.loading = false
     )
