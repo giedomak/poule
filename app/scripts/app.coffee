@@ -37,7 +37,7 @@ angular
         controller: 'WedstrijdenCtrl'
       .otherwise
         redirectTo: '/'
-  .run ($rootScope, $firebase) -> # Wanneer iets bij init gerund moet worden
+  .run ($rootScope, $firebase, $firebaseSimpleLogin, $http) -> # Wanneer iets bij init gerund moet worden
     $rootScope.loading = true
     
     $rootScope.ploegenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/ploegen")
@@ -79,6 +79,20 @@ angular
     $rootScope.wedstrijdenRef.$on("loaded", () ->
       $rootScope.loading = false
     )
+    
+    
+    dataRef = new Firebase("https://resplendent-fire-2516.firebaseio.com");
+    $rootScope.loginObj = $firebaseSimpleLogin(dataRef);
+    
+    pic = null
+    $rootScope.$on "$firebaseSimpleLogin:login", (e, user) ->
+      $http.get "https://graph.facebook.com/"+user.id+"/picture?redirect=false"
+      .success (data) ->
+        pic = data.data.url
+    
+    $rootScope.profilePic = () ->
+      pic
+    
   .filter 'reverse', ->
     (items) ->
       items.slice().reverse();

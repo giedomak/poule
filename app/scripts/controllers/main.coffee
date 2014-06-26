@@ -8,7 +8,7 @@
  # Controller of the poule2App
 ###
 angular.module('poule2App')
-  .controller 'MainCtrl', ($scope, $rootScope, $firebase) ->
+  .controller 'MainCtrl', ($scope, $rootScope, $firebase, $firebaseSimpleLogin) ->
     console.log "MainCtrl init"
     $rootScope.curTab = "main"
     
@@ -25,7 +25,11 @@ angular.module('poule2App')
       chat = $scope.newChat
       $scope.newChat = null
       $rootScope.chatsRef.$add(chat)
-  .filter 'sortByPunten', ->
+    $rootScope.$on "$firebaseSimpleLogin:login", (e, user) ->
+      console.log("User " + user.id + " successfully logged in!")
+      console.log user
+      console.log $rootScope.loginObj
+  .filter 'orderByPunten', ->
     (items, scope) ->
       items.sort (a,b) ->
         scope.punten(b.$id) - scope.punten(a.$id)
