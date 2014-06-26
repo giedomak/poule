@@ -32,8 +32,9 @@
         </td>
         <td>
           <form class='form-inline'>
-            <input min='0' ng-model="personen[selectedPersoon.$id].voorspellingen[key].score1" class='form-control' style='width: 70px;' type='number'/> - 
-            <input min='0' ng-model="personen[selectedPersoon.$id].voorspellingen[key].score2" class='form-control' style='width: 70px;' type='number'/>
+            <input ng-show="canChange(wedstrijd)" min='0' ng-model="personen[selectedPersoon.$id].voorspellingen[key].score1" class='form-control' style='width: 70px;' type='number'/>
+            {{canChange(wedstrijd) ? "" : personen[selectedPersoon.$id].voorspellingen[key].score1}} - {{canChange(wedstrijd) ? "" : personen[selectedPersoon.$id].voorspellingen[key].score2}}
+            <input ng-show="canChange(wedstrijd)" min='0' ng-model="personen[selectedPersoon.$id].voorspellingen[key].score2" class='form-control' style='width: 70px;' type='number'/>
           </form>
         </td>
         <td>
@@ -41,7 +42,7 @@
         </td>
       </tr>
     </table>
-    <p>Verwijder {{selectedPersoon.naam}} <a href=''><span class="glyphicon glyphicon-trash" ng-click="verwijder()"></span></a></p>
+    <!--<p>Verwijder {{selectedPersoon.naam}} <a href=''><span class="glyphicon glyphicon-trash" ng-click="verwijder()"></span></a></p>-->
   </div>
 
   <div>

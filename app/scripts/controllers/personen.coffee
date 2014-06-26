@@ -29,6 +29,8 @@ angular.module('poule2App')
         $rootScope.personen[key].voorspellingen[key2] = $rootScope.personen[key].voorspellingen[key2] || {score1:0, score2:0}
       )
       
+    $scope.canChange = (wedstrijd) ->
+      $rootScope.loginObj.user and $rootScope.selectedPersoon and parseInt($rootScope.loginObj.user.id) is parseInt($rootScope.selectedPersoon.id) and !wedstrijd.gespeeld
     
     $scope.voegToe = () ->
       console.log "persoon toevoegen"
