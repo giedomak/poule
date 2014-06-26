@@ -4,16 +4,14 @@
 </div>
 <br>
 
-<button class="btn btn-default" ng-click="loginObj.$login('facebook')">Login!</button>
-
 <h4>Chatbox</h4>
 <form class="form-inline">
-  <input class="form-control" type="text" placeholder="Afzender" ng-model="newChat.naam"/>
+  <input ng-hide="loginObj.user" class="form-control" type="text" placeholder="Afzender" ng-model="newChat.naam"/>
   <input class="form-control" type="text" placeholder="Chatbericht" ng-model="newChat.bericht"/>
   <button class="btn btn-default" ng-click="addChat()">Chat!</button>
 </form>
 <br>
-<div ng-show="newChat">{{newChat.naam + ": " + newChat.bericht}}</div>
+<div ng-show="newChat && newChat.bericht != ''">{{newChat.naam || loginObj.user.thirdPartyUserData.first_name}}{{": " + newChat.bericht}}</div>
 <div ng-repeat="chat in chats | orderByPriority | reverse">{{chat.naam + ": " + chat.bericht}}</div>
 <br>
 
