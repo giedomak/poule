@@ -12,7 +12,7 @@
 </form>
 <br>
 <div ng-show="newChat && newChat.bericht != ''">{{newChat.naam || loginObj.user.thirdPartyUserData.first_name}}{{": " + newChat.bericht}}</div>
-<div ng-repeat="chat in chats | orderByPriority | reverse">{{chat.naam + ": " + chat.bericht}}</div>
+<div ng-repeat="chat in chats | orderByPriority | reverse"><a ng-show="chat.id" ng-href="#/personen/{{chat.id}}">{{chat.naam}}</a>{{chat.id?"":chat.naam}}{{": " + chat.bericht}}</div>
 <br>
 
 <!--TODO
