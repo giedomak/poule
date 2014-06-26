@@ -8,9 +8,6 @@
  # Controller of the poule2App
 ###
 angular.module('poule2App')
-  .filter 'reverse', ->
-    (items) ->
-      items.slice().reverse();
   .controller 'MainCtrl', ($scope, $rootScope, $firebase) ->
     console.log "MainCtrl init"
     $rootScope.curTab = "main"
@@ -28,4 +25,8 @@ angular.module('poule2App')
       chat = $scope.newChat
       $scope.newChat = null
       $rootScope.chatsRef.$add(chat)
+  .filter 'sortByPunten', ->
+    (items, scope) ->
+      items.sort (a,b) ->
+        scope.punten(b.$id) - scope.punten(a.$id)
     

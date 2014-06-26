@@ -37,8 +37,6 @@ angular
         controller: 'WedstrijdenCtrl'
       .otherwise
         redirectTo: '/'
-#  .controller 'IndexCtrl', ($scope, $rootScope, $firebase, $filter) ->
-#    $rootScope.curTab = "
   .run ($rootScope, $firebase) -> # Wanneer iets bij init gerund moet worden
     $rootScope.loading = true
     
@@ -57,21 +55,31 @@ angular
     $rootScope.chatsRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/chats")
     $rootScope.chatsRef.$bind($rootScope,"chats")
     
+    #Volledige uitslag goed is 10 punten, alleen winnaar correct is 5 punten, gelijkspel correct is 7 punten, doelpunten thuis of uit team correct is 2 punten
     $rootScope.punten = (wedstrijd, voorspelling) ->
-      $punten = 0
-      if winst(wedstrijd, voorspelling)
-        $punten += 5
-      if gelijk(wedstrijd, voorspelling)
-        $punten += 1
-      $punten
+      points = 0
+      if correct(wedstrijd, voorspelling) then return 10
+      if gelijk(wedstrijd, voorspelling) then return 7
+      if winst(wedstrijd, voorspelling) then points = 5
+      if doelpuntCorrect(wedstrijd, voorspelling) then return points += 2
+      return points
     
     winst = (wedstrijd, voorspelling) ->
-      ((wedstrijd.scorePloeg1 > wedstrijd.scorePloeg2 && voorspelling.score1 > voorspelling.score2) || (wedstrijd.scorePloeg1 < wedstrijd.scorePloeg2 && voorspelling.score1 < voorspelling.score2))
+      return ((wedstrijd.scorePloeg1 > wedstrijd.scorePloeg2 && voorspelling.score1 > voorspelling.score2) || (wedstrijd.scorePloeg1 < wedstrijd.scorePloeg2 && voorspelling.score1 < voorspelling.score2))
 
     gelijk = (wedstrijd, voorspelling) ->
-      wedstrijd.scorePloeg1 == wedstrijd.scorePloeg2 && voorspelling.score1 == voorspelling.score2
-      
+      return (wedstrijd.scorePloeg1 == wedstrijd.scorePloeg2 && voorspelling.score1 == voorspelling.score2)
+
+    correct = (wedstrijd, voorspelling) ->
+      return (wedstrijd.scorePloeg1 == voorspelling.score1 && wedstrijd.scorePloeg2 == voorspelling.score2)
+
+    doelpuntCorrect = (wedstrijd, voorspelling) ->
+      return (wedstrijd.scorePloeg1 == voorspelling.score1 || wedstrijd.scorePloeg2 == voorspelling.score2)
+
     $rootScope.wedstrijdenRef.$on("loaded", () ->
       $rootScope.loading = false
     )
+  .filter 'reverse', ->
+    (items) ->
+      items.slice().reverse();
 

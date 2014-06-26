@@ -1,6 +1,6 @@
 <h4>Stand</h4>
-<div ng-repeat="(key,persoon) in personen">
-  {{persoon.naam}}: {{punten(key)}}
+<div ng-repeat="persoon in personen | orderByPriority | sortByPunten:this">
+  {{persoon.naam}}: {{punten(persoon.$id)}}
 </div>
 <br>
 
