@@ -16,7 +16,13 @@ angular.module('poule2App')
     $rootScope.personenRef.$on "loaded", () ->
       if $routeParams.naam
         ($scope.select(persoon.$id)) for persoon in ($filter('orderByPriority')($rootScope.personen)) when parseInt(persoon.id) is parseInt($routeParams.naam)
+      else
+        if $rootScope.loginObj.user
+          $scope.selectByFbid($rootScope.loginObj.user.id)
     
+    $scope.selectByFbid = (fbid) ->
+      ($scope.select(persoon.$id)) for persoon in ($filter('orderByPriority')($rootScope.personen)) when parseInt(persoon.id) is parseInt(fbid)
+      
     $scope.select = (key) ->
       $rootScope.selectedPersoon = $rootScope.personen.$child key
       console.log "Persoon selected: ",$rootScope.selectedPersoon.naam

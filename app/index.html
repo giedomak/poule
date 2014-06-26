@@ -24,7 +24,7 @@
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li ng-class="{'active': curTab === 'main'}"><a ng-href="#">Home</a></li>
-          <li ng-class="{'active': curTab === 'personen'}"><a ng-href="#/personen">Personen</a></li>
+          <li ng-class="{'active': curTab === 'personen'}"><a ng-href="#/personen">Voorspelling</a></li>
           <li ng-class="{'active': curTab === 'wedstrijden'}"><a ng-href="#/wedstrijden">Wedstrijden</a></li>
           <li ng-class="{'active': curTab === 'ploegen'}"><a ng-href="#/ploegen">Ploegen</a></li>
           <li>
@@ -36,7 +36,7 @@
         <h3 class="text-muted">WK 2014</h3>
       </div>
 
-      <div ng-view="" ng-hide="loading"></div>
+      <div class="view" ng-view="" ng-hide="loading"></div>
       <div ng-show="loading">Loading...<br><br></div>
 
       <div class="footer">
