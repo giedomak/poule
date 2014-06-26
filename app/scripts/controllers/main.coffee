@@ -29,8 +29,6 @@ angular.module('poule2App')
         $rootScope.chatsRef.$add(chat)
     $rootScope.$on "$firebaseSimpleLogin:login", (e, user) ->
       console.log("User " + user.id + " successfully logged in!")
-      console.log user
-      console.log $rootScope.loginObj
   .filter 'orderByPunten', ->
     (items, scope) ->
       items.sort (a,b) ->
