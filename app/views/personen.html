@@ -1,7 +1,7 @@
 <div>
   <ul class="nav nav-pills">
     <li ng-class="{'active': selectedPersoon.$id === key}" ng-repeat='(key,persoon) in personen'>
-      <a href='' ng-href="#/personen/{{persoon.naam|lowercase}}">
+      <a href='' ng-href="#/personen/{{persoon.id}}">
         {{persoon.naam}} 
       </a>
     </li>

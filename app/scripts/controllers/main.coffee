@@ -25,7 +25,9 @@ angular.module('poule2App')
       if $scope.newChat and $scope.newChat.bericht != "" and ($scope.newChat.naam or $rootScope.loginObj.user)
         chat = $scope.newChat
         $scope.newChat = null
-        chat.naam = chat.naam || $rootScope.loginObj.user.thirdPartyUserData.first_name
+        if $rootScope.loginObj.user
+          chat.naam = $rootScope.loginObj.user.thirdPartyUserData.first_name
+          chat.id = $rootScope.loginObj.user.id
         $rootScope.chatsRef.$add(chat)
     $rootScope.$on "$firebaseSimpleLogin:login", (e, user) ->
       console.log("User " + user.id + " successfully logged in!")
