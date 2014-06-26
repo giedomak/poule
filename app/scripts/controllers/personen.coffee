@@ -13,6 +13,10 @@ angular.module('poule2App')
     $rootScope.curTab = "personen"
     $scope.wed = {}
     
+    
+    $rootScope.$on "$firebaseSimpleLogin:login", (e, user) ->
+      $scope.selectByFbid user.id
+    
     $rootScope.personenRef.$on "loaded", () ->
       if $routeParams.naam
         ($scope.select(persoon.$id)) for persoon in ($filter('orderByPriority')($rootScope.personen)) when parseInt(persoon.id) is parseInt($routeParams.naam)

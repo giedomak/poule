@@ -1,4 +1,7 @@
-<div>
+<div ng-hide="selectedPersoon">
+  Please <a href="" ng-click="loginObj.$login('facebook')">login</a>
+  <br><br>
+</div>
 <!--  <ul class="nav nav-pills">
     <li ng-class="{'active': selectedPersoon.$id === key}" ng-repeat='(key,persoon) in personen'>
       <a href='' ng-href="#/personen/{{persoon.id}}">
@@ -9,9 +12,8 @@
   </ul>-->
 
   <div ng-show='selectedPersoon'>
-    <br>
     <h4>{{selectedPersoon.naam}}'s voorspellingen</h4>
-    <table class="table table-condensed table-striped">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>Ploeg1</th>
@@ -53,5 +55,3 @@
     </form>
     <br>
   </div>-->
-
-</div>
