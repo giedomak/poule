@@ -24,12 +24,12 @@
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li ng-class="{'active': curTab === 'main'}"><a ng-href="#">Home</a></li>
-          <li ng-class="{'active': curTab === 'personen'}"><a ng-href="#/personen">Voorspelling</a></li>
+          <li ng-class="{'active': curTab === 'personen'}"><a ng-href="#/personen">Voorspellingen</a></li>
           <li ng-class="{'active': curTab === 'wedstrijden'}"><a ng-href="#/wedstrijden">Wedstrijden</a></li>
           <li ng-class="{'active': curTab === 'ploegen'}"><a ng-href="#/ploegen">Ploegen</a></li>
           <li>
             <button ng-hide="loginObj.user" class="btn btn-default" ng-click="loginObj.$login('facebook')">Login!</button>
-            <img ng-show="loginObj.user" ng-src="{{profilePic()}}" ng-click="loginObj.$logout()">
+            <img ng-show="loginObj.user" ng-src="{{profilePic}}" ng-click="loginObj.$logout()">
           </li>
           <!--<li><a ng-href="#">Contact</a></li>-->
         </ul>

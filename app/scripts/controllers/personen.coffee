@@ -12,40 +12,43 @@ angular.module('poule2App')
     console.log "PersonenCtrl init"
     $rootScope.curTab = "personen"
     $scope.wed = {}
+    $scope.selected = null
     
-    
+    #select user if login was made from within personen
     $rootScope.$on "$firebaseSimpleLogin:login", (e, user) ->
-      $scope.selectByFbid user.id
+      $scope.select user.id
     
+    #select person when loading page
     $rootScope.personenRef.$on "loaded", () ->
-      if $routeParams.naam
-        ($scope.select(persoon.$id)) for persoon in ($filter('orderByPriority')($rootScope.personen)) when parseInt(persoon.id) is parseInt($routeParams.naam)
+      console.log "personenRef loaded event"
+      if $routeParams.id
+#        ($scope.select(persoon.$id)) for persoon in ($filter('orderByPriority')($rootScope.personen)) when parseInt(persoon.id) is parseInt($routeParams.naam)
+        $scope.select(parseInt($routeParams.id))
       else
         if $rootScope.loginObj.user
-          $scope.selectByFbid($rootScope.loginObj.user.id)
-    
-    $scope.selectByFbid = (fbid) ->
-      ($scope.select(persoon.$id)) for persoon in ($filter('orderByPriority')($rootScope.personen)) when parseInt(persoon.id) is parseInt(fbid)
+          $scope.select($rootScope.loginObj.user.id)
       
+    initVoorspelling = (persoon_id, wed_id) ->
+      $rootScope.personen[persoon_id].voorspellingen = $rootScope.personen[persoon_id].voorspellingen || {}
+      $rootScope.personen[persoon_id].voorspellingen[wed_id] = $rootScope.personen[persoon_id].voorspellingen[wed_id] || {bogus: false}
+          
+    $scope.voorspellingIsSet = (persoon_id, wed_id) ->
+      if $rootScope.personen
+        if $rootScope.personen[persoon_id]
+          if $rootScope.personen[persoon_id].voorspellingen
+            if $rootScope.personen[persoon_id].voorspellingen[wed_id]
+              return $rootScope.personen[persoon_id].voorspellingen[wed_id].hasOwnProperty('score1') && $rootScope.personen[persoon_id].voorspellingen[wed_id].hasOwnProperty('score2')
+    
     $scope.select = (key) ->
-      $rootScope.selectedPersoon = $rootScope.personen.$child key
-      console.log "Persoon selected: ",$rootScope.selectedPersoon.naam
-      ref = $rootScope.wedstrijden.$getIndex()
-      ref.forEach( (key2, i) ->
-#        console.log(i, $rootScope.wedstrijden[key2]);
-#        name = child.name()
-        $scope.wed[key2] = { score1: 3}
-        $rootScope.personen[key].voorspellingen = $rootScope.personen[key].voorspellingen || {}
-        $rootScope.personen[key].voorspellingen[key2] = $rootScope.personen[key].voorspellingen[key2] || {score1:0, score2:0}
-      )
+      $rootScope.personenRef.$on "loaded", () ->
+        if $scope.selected isnt parseInt key
+          $scope.selected = parseInt key
+          console.log "Persoon selected: ",$rootScope.personen[key].naam
+          initVoorspelling $scope.selected, wed_id for foo, wed_id of $rootScope.wedstrijden.$getIndex()
       
     $scope.canChange = (wedstrijd) ->
-      $rootScope.loginObj.user and $rootScope.selectedPersoon and parseInt($rootScope.loginObj.user.id) is parseInt($rootScope.selectedPersoon.id) and !wedstrijd.gespeeld
+      $rootScope.loginObj.user and $scope.selected and parseInt($rootScope.loginObj.user.id) is parseInt($scope.selected) and !wedstrijd.gespeeld
     
-    $scope.voegToe = () ->
-      console.log "persoon toevoegen"
-      $rootScope.personenRef.$add($scope.newPersoon)
-      
     $scope.verwijder = () ->
       console.log "persoon verwijderen"
       console.log $rootScope.selectedPersoon
@@ -53,7 +56,7 @@ angular.module('poule2App')
       $rootScope.selectedPersoon = null
       
     $scope.puntenWedstrijd = (key, wedstrijd) ->
-      if $rootScope.selectedPersoon && wedstrijd.gespeeld
-        return $rootScope.punten(wedstrijd, $rootScope.personen[$rootScope.selectedPersoon.$id].voorspellingen[key])
+      if $scope.selected && wedstrijd.gespeeld
+        return $rootScope.punten(wedstrijd, $rootScope.personen[$scope.selected].voorspellingen[key])
       else 
         return 0

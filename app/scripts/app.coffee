@@ -26,7 +26,7 @@ angular
       .when '/personen',
         templateUrl: 'views/personen.html'
         controller: 'PersonenCtrl'
-      .when '/personen/:naam',
+      .when '/personen/:id',
         templateUrl: 'views/personen.html'
         controller: 'PersonenCtrl'
       .when '/ploegen',
@@ -39,7 +39,9 @@ angular
         redirectTo: '/'
   .run ($rootScope, $firebase, $firebaseSimpleLogin, $http) -> # Wanneer iets bij init gerund moet worden
     $rootScope.loading = true
+    $rootScope.profilePic = null
     
+    #firebase bindings
     $rootScope.ploegenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/ploegen")
     $rootScope.ploegenRef.$bind($rootScope,"ploegen")
     
@@ -54,12 +56,22 @@ angular
     
     $rootScope.chatsRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/chats")
     $rootScope.chatsRef.$bind($rootScope,"chats")
+
+    #set loading to false
+    $rootScope.wedstrijdenRef.$on("loaded", () ->
+      $rootScope.loading = false
+    )
+    
+    #login object for firebase easy login
+    dataRef = new Firebase("https://resplendent-fire-2516.firebaseio.com");
+    $rootScope.loginObj = $firebaseSimpleLogin(dataRef);
     
     #Volledige uitslag goed is 10 punten, alleen winnaar correct is 5 punten, gelijkspel correct is 7 punten, doelpunten thuis of uit team correct is 2 punten
     $rootScope.punten = (wedstrijd, voorspelling) ->
-      points = 0
+      if !voorspelling.hasOwnProperty('score1') or !voorspelling.hasOwnProperty('score2') then return 0
       if correct(wedstrijd, voorspelling) then return 10
       if gelijk(wedstrijd, voorspelling) then return 7
+      points = 0
       if winst(wedstrijd, voorspelling) then points = 5
       if doelpuntCorrect(wedstrijd, voorspelling) then return points += 2
       return points
@@ -75,23 +87,29 @@ angular
 
     doelpuntCorrect = (wedstrijd, voorspelling) ->
       return (wedstrijd.scorePloeg1 == voorspelling.score1 || wedstrijd.scorePloeg2 == voorspelling.score2)
-
-    $rootScope.wedstrijdenRef.$on("loaded", () ->
-      $rootScope.loading = false
-    )
     
-    
-    dataRef = new Firebase("https://resplendent-fire-2516.firebaseio.com");
-    $rootScope.loginObj = $firebaseSimpleLogin(dataRef);
-    
-    pic = null
+    #persoon toevoegen
+    $rootScope.voegPersoonToe = (newPersoon) ->
+      console.log "persoon toevoegen"
+      $rootScope.personenRef.$add(newPersoon)
+      
+    #persoon toevoegen aan de hand van facebook
+    addPersoonFb = (user) ->
+      $rootScope.personenRef.$on "loaded", () ->
+        if user.id in $rootScope.personenRef.$getIndex()
+          console.log "Id exists", user
+        else 
+          console.log "It doesn't, creating it", user
+          $rootScope.personen[user.id] = {naam: user.thirdPartyUserData.first_name}
+      
+    #On firebase login event. Get's fired when logged in already or when logging in
     $rootScope.$on "$firebaseSimpleLogin:login", (e, user) ->
+      #add user if it does not exist
+      addPersoonFb(user)
+      #update profile picture
       $http.get "https://graph.facebook.com/"+user.id+"/picture?redirect=false"
       .success (data) ->
-        pic = data.data.url
-    
-    $rootScope.profilePic = () ->
-      pic
+        $rootScope.profilePic = data.data.url
     
   .filter 'reverse', ->
     (items) ->

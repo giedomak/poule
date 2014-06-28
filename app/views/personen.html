@@ -1,4 +1,4 @@
-<div ng-hide="selectedPersoon">
+<div ng-hide="selected">
   Please <a href="" ng-click="loginObj.$login('facebook')">login</a>
   <br><br>
 </div>
@@ -11,8 +11,8 @@
 
   </ul>-->
 
-  <div ng-show='selectedPersoon'>
-    <h4>{{selectedPersoon.naam}}'s voorspellingen</h4>
+  <div ng-show='selected'>
+    <h4>{{personen[selected].naam}}'s voorspellingen</h4>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -34,9 +34,9 @@
         </td>
         <td>
           <form class='form-inline'>
-            <input ng-show="canChange(wedstrijd)" min='0' ng-model="personen[selectedPersoon.$id].voorspellingen[key].score1" class='form-control' style='width: 70px;' type='number'/>
-            {{canChange(wedstrijd) ? "" : personen[selectedPersoon.$id].voorspellingen[key].score1}} - {{canChange(wedstrijd) ? "" : personen[selectedPersoon.$id].voorspellingen[key].score2}}
-            <input ng-show="canChange(wedstrijd)" min='0' ng-model="personen[selectedPersoon.$id].voorspellingen[key].score2" class='form-control' style='width: 70px;' type='number'/>
+            <input ng-show="canChange(wedstrijd)" min='0' ng-model="personen[selected].voorspellingen[key].score1" class='form-control' style='width: 70px;' type='number'/>
+            <span ng-hide="canChange(wedstrijd)">{{voorspellingIsSet(selected,key) ? personen[selected].voorspellingen[key].score1+" - "+personen[selected].voorspellingen[key].score2 : "Geen"}}</span>
+            <input ng-show="canChange(wedstrijd)" min='0' ng-model="personen[selected].voorspellingen[key].score2" class='form-control' style='width: 70px;' type='number'/>
           </form>
         </td>
         <td>
@@ -51,7 +51,7 @@
     <br>
     <form class='form-inline'>
       <p>Nieuwe persoon toevoegen: <input type='text' class="form-control" ng-model="newPersoon.naam"/>
-        <button type='submit' class="btn btn-default" ng-click="voegToe()">Add</button></p>
+        <button type='submit' class="btn btn-default" ng-click="voegPersoonToe(newPersoon)">Add</button></p>
     </form>
     <br>
   </div>-->
