@@ -40,6 +40,10 @@ angular
   .run ($rootScope, $firebase, $firebaseSimpleLogin, $http) -> # Wanneer iets bij init gerund moet worden
     $rootScope.loading = true
     $rootScope.profilePic = null
+    $rootScope.ploegen = {}
+    $rootScope.personen = {}
+    $rootScope.wedstrijden = {}
+    $rootScope.chats = {}
     
     #firebase bindings
     $rootScope.ploegenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/ploegen")
@@ -50,9 +54,6 @@ angular
     
     $rootScope.personenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/personen")
     $rootScope.personenRef.$bind($rootScope,"personen")
-    
-    $rootScope.voorspellingenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/voorspellingen")
-    $rootScope.voorspellingenRef.$bind($rootScope,"voorspellingen")
     
     $rootScope.chatsRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/chats")
     $rootScope.chatsRef.$bind($rootScope,"chats")

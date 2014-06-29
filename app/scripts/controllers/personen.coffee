@@ -30,7 +30,7 @@ angular.module('poule2App')
       
     initVoorspelling = (persoon_id, wed_id) ->
       $rootScope.personen[persoon_id].voorspellingen = $rootScope.personen[persoon_id].voorspellingen || {}
-      $rootScope.personen[persoon_id].voorspellingen[wed_id] = $rootScope.personen[persoon_id].voorspellingen[wed_id] || {bogus: false}
+      $rootScope.personen[persoon_id].voorspellingen[wed_id] = $rootScope.personen[persoon_id].voorspellingen[wed_id] || {bogus: false} #bogus is nodig om daadwerkelijk naar de DB te schrijven
           
     $scope.voorspellingIsSet = (persoon_id, wed_id) ->
       return 'score1' in $rootScope.personen and 'score2' in $rootScope.personen
