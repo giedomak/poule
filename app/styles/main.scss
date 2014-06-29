@@ -77,6 +77,14 @@ body {
   }
 }
 
+.voorspelling {
+  padding: 2px 0 2px 5px !important;
+  /*padding-left: 5px !important;*/
+  margin: 0 !important;
+  height: auto !important;
+  width: 45px !important;
+}
+
 .view.ng-enter {
   animation:view_enter 1s;
 }

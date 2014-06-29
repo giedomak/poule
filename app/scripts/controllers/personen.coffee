@@ -11,7 +11,6 @@ angular.module('poule2App')
   .controller 'PersonenCtrl', ($scope, $rootScope, $firebase, $routeParams, $filter) ->
     console.log "PersonenCtrl init"
     $rootScope.curTab = "personen"
-    $scope.wed = {}
     $scope.selected = null
     
     #select user if login was made from within personen
@@ -33,7 +32,11 @@ angular.module('poule2App')
       $rootScope.personen[persoon_id].voorspellingen[wed_id] = $rootScope.personen[persoon_id].voorspellingen[wed_id] || {bogus: false} #bogus is nodig om daadwerkelijk naar de DB te schrijven
           
     $scope.voorspellingIsSet = (persoon_id, wed_id) ->
-      return 'score1' in $rootScope.personen and 'score2' in $rootScope.personen
+      if $rootScope.personen.hasOwnProperty(parseInt(persoon_id))
+        if $rootScope.personen[persoon_id].hasOwnProperty('voorspellingen')
+          if $rootScope.personen[persoon_id].voorspellingen.hasOwnProperty(wed_id)
+            voorspelling = $rootScope.personen[persoon_id].voorspellingen[wed_id]
+            return voorspelling.hasOwnProperty('score1') and voorspelling.hasOwnProperty('score2')
     
     $scope.select = (key) ->
       $rootScope.personenRef.$on "loaded", () ->
