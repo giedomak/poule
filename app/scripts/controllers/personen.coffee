@@ -33,11 +33,7 @@ angular.module('poule2App')
       $rootScope.personen[persoon_id].voorspellingen[wed_id] = $rootScope.personen[persoon_id].voorspellingen[wed_id] || {bogus: false}
           
     $scope.voorspellingIsSet = (persoon_id, wed_id) ->
-      if $rootScope.personen
-        if $rootScope.personen[persoon_id]
-          if $rootScope.personen[persoon_id].voorspellingen
-            if $rootScope.personen[persoon_id].voorspellingen[wed_id]
-              return $rootScope.personen[persoon_id].voorspellingen[wed_id].hasOwnProperty('score1') && $rootScope.personen[persoon_id].voorspellingen[wed_id].hasOwnProperty('score2')
+      return 'score1' in $rootScope.personen and 'score2' in $rootScope.personen
     
     $scope.select = (key) ->
       $rootScope.personenRef.$on "loaded", () ->
