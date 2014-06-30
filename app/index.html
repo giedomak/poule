@@ -25,11 +25,16 @@
         <ul class="nav nav-pills pull-right">
           <li ng-class="{'active': curTab === 'main'}"><a ng-href="#">Home</a></li>
           <li ng-class="{'active': curTab === 'personen'}"><a ng-href="#/personen">Voorspellingen</a></li>
-          <li ng-class="{'active': curTab === 'wedstrijden'}"><a ng-href="#/wedstrijden">Wedstrijden</a></li>
-          <li ng-class="{'active': curTab === 'ploegen'}"><a ng-href="#/ploegen">Ploegen</a></li>
+          <li ng-show="personen[loginObj.user.id].role === 'admin'" class="dropdown" ng-class="{'active': curTab === 'wedstrijden' || curTab === 'ploegen'}">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-class="{'active': curTab === 'wedstrijden'}"><a ng-href="#/wedstrijden">Wedstrijden</a></li>
+              <li ng-class="{'active': curTab === 'ploegen'}"><a ng-href="#/ploegen">Ploegen</a></li>
+            </ul>
+          </li>
           <li>
-            <button ng-hide="loginObj.user" class="btn btn-default" ng-click="loginObj.$login('facebook')">Login!</button>
-            <img ng-show="loginObj.user" ng-src="{{profilePic}}" ng-click="loginObj.$logout()">
+            <button style="margin-left: 5px; margin-top: 3px" ng-hide="loginObj.user" class="btn btn-default" ng-click="loginObj.$login('facebook')">Login</button>
+            <img style="margin-left: 5px; margin-top: -4px;" ng-show="loginObj.user" ng-src="{{profilePic}}" ng-click="loginObj.$logout()">
           </li>
           <!--<li><a ng-href="#">Contact</a></li>-->
         </ul>

@@ -1,4 +1,6 @@
 <h4>Stand</h4>
+
+<!--<pagination boundary-links="true" total-items="maxItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">ff</pagination>-->
 <div ng-repeat="(key, persoon) in personen | orderByPriority | orderByPunten:this">
   {{key+1+ ": "}}<a ng-href="#/personen/{{persoon.$id}}">{{persoon.naam}}</a>: {{punten(persoon.$id)}}
 </div>
@@ -7,12 +9,16 @@
 <h4>Chat</h4>
 <form class="form-inline">
   <input ng-hide="loginObj.user" class="form-control" type="text" placeholder="Afzender" ng-model="newChat.naam"/>
-  <input class="form-control" type="text" placeholder="Chatbericht" ng-model="newChat.bericht"/>
-  <button class="btn btn-default" ng-click="addChat()">Verstuur!</button>
+  <div class="input-group">
+    <input class="form-control" type="text" placeholder="Chatbericht" ng-model="newChat.bericht"/>
+    <span class="input-group-btn">
+      <button class="btn btn-default" ng-click="addChat()">Send</button>
+    </span>
+  </div>
 </form>
 <br>
-<div ng-show="newChat && newChat.bericht != ''" >{{newChat.naam || loginObj.user.thirdPartyUserData.first_name}}{{": " + newChat.bericht}}</div>
-<div ng-repeat="chat in chats | orderByPriority | reverse"><a ng-show="chat.id" ng-href="#/personen/{{chat.id}}">{{chat.naam}}</a>{{chat.id?"":chat.naam}}{{": " + chat.bericht}}</div>
+<div ng-show="newChat.bericht && newChat.bericht !== ''" class="fader">{{newChat.naam|| loginObj.user.thirdPartyUserData.first_name}}{{": " + newChat.bericht}}</div>
+<div ng-repeat="chat in chats| orderByPriority | reverse"><a ng-show="chat.id" ng-href="#/personen/{{chat.id}}">{{chat.naam}}</a>{{chat.id?"":chat.naam}}{{": " + chat.bericht}}</div>
 <br>
 
 <!--TODO

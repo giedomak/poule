@@ -1,6 +1,8 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+
 // bower:scss
 @import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+@import "animate.css";
 // endbower
 
 .browsehappy {
@@ -85,14 +87,60 @@ body {
   width: 45px !important;
 }
 
-.view.ng-enter {
+.fader.ng-hide-remove {
+  animation: fadeInDown 0.5s;
+}
+
+.faderChats.ng-enter {
+  animation: fadeInDown 0.5s;
+}
+
+.faderChats.ng-leave {
+  animation: fadeOutUp 0.5s;
+}
+
+/*.fader.ng-hide-add {
+  animation: fadeOut 1s;
+  display: block !important;
+}*/
+
+/*.fader.ng-hide-add,*/
+/*.fader.ng-hide-remove {
+  display: block !important;
+
+  -webkit-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -moz-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -ms-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -o-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  position: relative !important;
+}
+
+.fader.ng-hide {
+  opacity: 0 !important;
+  top: -50px !important;
+  height: 0px !important;
+}
+
+.fader.ng-hide-remove-active, .fader.ng-hide-add {
+  opacity: 1.0 !important;
+  top: 0 !important;
+  height: 30px !important;
+}
+.fader.ng-hide-add-active, .fader.ng-hide-remove {
+  opacity: 0 !important;
+  top: -50px !important;
+  height: 0px !important;
+}*/
+
+/*.view.ng-enter {
   animation:view_enter 1s;
 }
 @keyframes view_enter {
   0% { left:100%; }
   30% { left:80%; }
   100% { left:0; }
-}
+}*/
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {

@@ -11,6 +11,9 @@ angular.module('poule2App')
   .controller 'MainCtrl', ($scope, $rootScope, $firebase, $firebaseSimpleLogin) ->
     console.log "MainCtrl init"
     $rootScope.curTab = "main"
+    $scope.currentPage = 4
+    $scope.maxItems = 30
+    $scope.newChat = {}
     
     $scope.punten = (key_persoon) ->
       $punten = 0
