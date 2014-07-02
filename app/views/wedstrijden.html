@@ -1,4 +1,8 @@
-<div>
+<div ng-hide="isAdmin()">
+  You don't have admin rights<br><br>
+</div>
+
+<div ng-show="isAdmin()">
 
   <div>
     <!--{{wedstrijd}}-->

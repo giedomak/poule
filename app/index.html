@@ -30,7 +30,7 @@
         <ul class="nav nav-pills pull-right">
           <li ng-class="{'active': curTab === 'main'}"><a ng-href="#">Home</a></li>
           <li ng-class="{'active': curTab === 'personen'}"><a ng-href="#/personen">Voorspellingen</a></li>
-          <li ng-show="personen[loginObj.user.id].role === 'admin'" class="dropdown" ng-class="{'active': curTab === 'wedstrijden' || curTab === 'ploegen'}">
+          <li ng-show="isAdmin()" class="dropdown" ng-class="{'active': curTab === 'wedstrijden' || curTab === 'ploegen'}">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li ng-class="{'active': curTab === 'wedstrijden'}"><a ng-href="#/wedstrijden">Wedstrijden</a></li>
@@ -90,6 +90,7 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
     <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js"></script>
     <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js"></script>
     <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js"></script>

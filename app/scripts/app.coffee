@@ -39,6 +39,7 @@ angular
         redirectTo: '/'
   .run ($rootScope, $firebase, $firebaseSimpleLogin, $http) -> # Wanneer iets bij init gerund moet worden
     $rootScope.loading = true
+    personenRefLoaded = false
     $rootScope.profilePic = null
     $rootScope.ploegen = {}
     $rootScope.personen = {}
@@ -62,6 +63,9 @@ angular
     $rootScope.wedstrijdenRef.$on("loaded", () ->
       $rootScope.loading = false
     )
+    
+    $rootScope.personenRef.$on "loaded", () ->
+      personenRefLoaded = true
     
     #login object for firebase easy login
     dataRef = new Firebase("https://resplendent-fire-2516.firebaseio.com");
@@ -111,6 +115,10 @@ angular
       $http.get "https://graph.facebook.com/"+user.id+"/picture?redirect=false"
       .success (data) ->
         $rootScope.profilePic = data.data.url
+        
+    $rootScope.isAdmin = () ->
+      if $rootScope.loginObj.user and personenRefLoaded
+        return $rootScope.personen[$rootScope.loginObj.user.id].role is 'admin' 
     
   .filter 'reverse', ->
     (items) ->
