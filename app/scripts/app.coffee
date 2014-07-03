@@ -114,7 +114,7 @@ angular
           console.log "Id exists", user
         else 
           console.log "It doesn't, creating it", user
-          $rootScope.personen[user.id] = {naam: user.thirdPartyUserData.first_name}
+          $rootScope.personen[user.id] = {naam: user.thirdPartyUserData.first_name, thirdPartyUserData: user.thirdPartyUserData}
       
     #On firebase login event. Get's fired when logged in already or when logging in
     $rootScope.$on "$firebaseSimpleLogin:login", (e, user) ->
