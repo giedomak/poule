@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/animate.css">
     <link rel="stylesheet" href="styles/css_spinner.css">
-    <link rel="stylesheet" href="styles/main.scss">
-    <link rel="stylesheet" href="styles/animate.scss">
-    <link rel="stylesheet" href="styles/css_spinner.scss">
     <!-- endbuild -->
   </head>
   <body ng-app="poule2App">
@@ -30,9 +27,10 @@
         <ul class="nav nav-pills pull-right">
           <li ng-class="{'active': curTab === 'main'}"><a ng-href="#">Home</a></li>
           <li ng-class="{'active': curTab === 'personen'}"><a ng-href="#/personen">Voorspellingen</a></li>
-          <li ng-show="isAdmin()" class="dropdown" ng-class="{'active': curTab === 'wedstrijden' || curTab === 'ploegen'}">
+          <li ng-show="isAdmin()" class="dropdown" ng-class="{'active': curTab === 'wedstrijden' || curTab === 'ploegen' || curTab === 'opties'}">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
+              <li ng-class="{'active': curTab === 'opties'}"><a ng-href="#/opties">Opties</a></li>
               <li ng-class="{'active': curTab === 'wedstrijden'}"><a ng-href="#/wedstrijden">Wedstrijden</a></li>
               <li ng-class="{'active': curTab === 'ploegen'}"><a ng-href="#/ploegen">Ploegen</a></li>
             </ul>
@@ -121,6 +119,7 @@
     <script src="scripts/controllers/ploegen.js"></script>
     <script src="scripts/controllers/wedstrijden.js"></script>
     <script src="scripts/controllers/personen.js"></script>
+    <script src="scripts/controllers/opties.js"></script>
     <!-- endbuild -->
   </body>
 </html>

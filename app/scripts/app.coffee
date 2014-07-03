@@ -32,6 +32,9 @@ angular
       .when '/ploegen',
         templateUrl: 'views/ploegen.html'
         controller: 'PloegenCtrl'
+      .when '/opties',
+        templateUrl: 'views/opties.html'
+        controller: 'OptiesCtrl'
       .when '/wedstrijden',
         templateUrl: 'views/wedstrijden.html'
         controller: 'WedstrijdenCtrl'
