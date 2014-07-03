@@ -3,51 +3,65 @@
 </div>
 
 <div ng-show="isAdmin()">
+  <!--<timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>-->
 
-  <div>
-    <!--{{wedstrijd}}-->
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Ploeg1</th>
-          <th>Ploeg2</th>
-          <th>Gespeeld</th>
-          <th>Stand</th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tr ng-repeat="(key, wedstrijd) in wedstrijden">
-        <td>{{wedstrijd.ploeg1.naam}}</td>
-        <td>{{wedstrijd.ploeg2.naam}}</td>
-        <td>
-          <div class="checkbox-inline">
-            <label><input type="checkbox" ng-model="wedstrijd.gespeeld"></label>
-          </div>
-        </td>
-        <td>
-          <div ng-show='wedstrijd.gespeeld'>
-            <form class='form-inline'>
-              <input min='0' ng-model="wedstrijd.scorePloeg1" class='form-control' style='width: 70px;' type='number'/> - 
-              <input min='0' ng-model="wedstrijd.scorePloeg2" class='form-control' style='width: 70px;' type='number'/>
-            </form>
-          </div>
-        </td>
-        <td>
-          <a href=''><span class="glyphicon glyphicon-trash" ng-click="verwijder(key)"></span></a><br>
-        </td>
+  <!--{{wedstrijd}}-->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Datum</th>
+        <th>Tijd</th>
+        <th>G</th>
+        <th>Uitslag</th>
+        <th></th>
       </tr>
-    </table>
-  </div>
-  <br>
+    </thead>
+
+    <tr ng-repeat="(key, wedstrijd) in wedstrijden | orderByPriority | orderBy:'date'">
+      <td>{{wedstrijd.ploeg1.naam}} - {{wedstrijd.ploeg2.naam}}</td>
+      <td>
+        <span style="width: 120px;" class="input-group">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="wedstrijd.date" is-open="opened[key]" datepicker-options="dateOptions" show-button-bar="false" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event, key)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </span>
+      </td>
+      <td>
+          <form class='form-inline'>
+        <input min='0' max='24' ng-model="wedstrijd.hour" class='form-control voorspelling' type='number'/>
+        :<input min='0' max='60' ng-model="wedstrijd.minute" class='form-control voorspelling' type='number'/>
+          </form>
+      </td>
+      <td>
+        <div class="checkbox-inline">
+          <label><input type="checkbox" ng-model="wedstrijd.gespeeld"></label>
+        </div>
+      </td>
+      <td>
+        <div ng-show='wedstrijd.gespeeld'>
+          <form class='form-inline'>
+            <input min='0' ng-model="wedstrijd.scorePloeg1" class='form-control voorspelling' style='width: 70px;' type='number'/> - 
+            <input min='0' ng-model="wedstrijd.scorePloeg2" class='form-control voorspelling' style='width: 70px;' type='number'/>
+          </form>
+        </div>
+      </td>
+      <td>
+        <a href=''><span class="glyphicon glyphicon-trash" ng-click="verwijder(key)"></span></a><br>
+      </td>
+    </tr>
+  </table>
+</div>
+<br>
 
 
-  <form class='form-inline'>
-    Wedstrijd toevoegen:
-    <select class='form-control' ng-model="newWedstrijd.ploeg1" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'></select>
-    -
-    <select class='form-control' ng-model="newWedstrijd.ploeg2" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'></select>
-    <button ng-click="voegToe()" class="btn btn-default">Add</button>
-  </form>
-  <br>
+<form class='form-inline'>
+  Wedstrijd toevoegen:
+  <select class='form-control' ng-model="newWedstrijd.ploeg1" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'></select>
+  -
+  <select class='form-control' ng-model="newWedstrijd.ploeg2" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'></select>
+  <button ng-click="voegToe()" class="btn btn-default">Add</button>
+</form>
+<br>
 </div>
