@@ -16,17 +16,15 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Ploeg1</th>
-        <th>Ploeg2</th>
+        <th></th>
         <th>Uitslag</th>
         <th>Voorspelling</th>
         <th>Punten</th>
       </tr>
     </thead>
 
-    <tr ng-repeat="(key, wedstrijd) in wedstrijden">
-      <td>{{wedstrijd.ploeg1.naam}}</td>
-      <td>{{wedstrijd.ploeg2.naam}}</td>
+    <tr ng-repeat="wedstrijd in wedstrijden | orderByPriority | orderBy:'date'">
+      <td>{{wedstrijd.ploeg1.naam}} - {{wedstrijd.ploeg2.naam}}</td>
       <td>
         <div ng-show="wedstrijd.gespeeld">
           {{wedstrijd.scorePloeg1 + " - " + wedstrijd.scorePloeg2}}
@@ -35,14 +33,14 @@
       <td>
         <form class='form-inline'>
           <span ng-show="canChange(wedstrijd)">
-            <input min='0' ng-model="personen[selected].voorspellingen[key].score1" class='form-control voorspelling' type='number'/>
-            - <input min='0' ng-model="personen[selected].voorspellingen[key].score2" class='form-control voorspelling' type='number'/>
+            <input min='0' ng-model="personen[selected].voorspellingen[wedstrijd.$id].score1" class='form-control voorspelling' type='number'/>
+            - <input min='0' ng-model="personen[selected].voorspellingen[wedstrijd.$id].score2" class='form-control voorspelling' type='number'/>
           </span>
-          <span ng-hide="canChange(wedstrijd)">{{voorspellingIsSet(selected,key) ? personen[selected].voorspellingen[key].score1+" - "+personen[selected].voorspellingen[key].score2 : "Geen"}}</span>
+          <span ng-hide="canChange(wedstrijd)">{{voorspellingIsSet(selected, wedstrijd.$id) ? personen[selected].voorspellingen[wedstrijd.$id].score1+" - "+personen[selected].voorspellingen[wedstrijd.$id].score2 : "Geen"}}</span>
         </form>
       </td>
       <td>
-        <div ng-show="wedstrijd.gespeeld">{{ "+"+puntenWedstrijd(key, wedstrijd)}}</div>
+        <div ng-show="wedstrijd.gespeeld">{{ "+"+puntenWedstrijd(wedstrijd.$id, wedstrijd)}}</div>
       </td>
     </tr>
   </table>

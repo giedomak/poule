@@ -55,7 +55,7 @@ angular.module('poule2App')
       $rootScope.selectedPersoon = null
       
     $scope.puntenWedstrijd = (key, wedstrijd) ->
-      if $scope.selected && wedstrijd.gespeeld
+      if $scope.selected && wedstrijd.gespeeld && $scope.voorspellingIsSet $scope.selected, key
         return $rootScope.punten(wedstrijd, $rootScope.personen[$scope.selected].voorspellingen[key])
       else 
         return 0

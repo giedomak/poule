@@ -6,6 +6,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 
 /*Fix for mouse pointer empty href in angular-bootstrap*/
 /*.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }*/
+a { cursor: pointer; }
 
 .browsehappy {
   margin: 0.2em 0;

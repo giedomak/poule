@@ -66,10 +66,11 @@ angular
     #set loading to false
     $rootScope.wedstrijdenRef.$on("loaded", () ->
       $rootScope.loading = false
+      $rootScope.wedstrijdenRefLoaded = true
     )
     
     $rootScope.personenRef.$on "loaded", () ->
-      personenRefLoaded = true
+      $rootScope.personenRefLoaded = true
     
     #login object for firebase easy login
     dataRef = new Firebase("https://resplendent-fire-2516.firebaseio.com");
@@ -81,8 +82,9 @@ angular
       if correct(wedstrijd, voorspelling) then return 10
       if gelijk(wedstrijd, voorspelling) then return 7
       points = 0
-      if winst(wedstrijd, voorspelling) then points = 5
-      if doelpuntCorrect(wedstrijd, voorspelling) then return points += 2
+      if winst(wedstrijd, voorspelling) 
+        points = 5
+        if doelpuntCorrect(wedstrijd, voorspelling) then return points += 2
       return points
     
     winst = (wedstrijd, voorspelling) ->
@@ -121,7 +123,7 @@ angular
         $rootScope.profilePic = data.data.url
         
     $rootScope.isAdmin = () ->
-      if $rootScope.loginObj.user and personenRefLoaded
+      if $rootScope.loginObj.user and $rootScope.personenRefLoaded
         return $rootScope.personen[$rootScope.loginObj.user.id].role is 'admin' 
     
   .filter 'reverse', ->

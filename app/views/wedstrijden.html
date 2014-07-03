@@ -18,21 +18,21 @@
       </tr>
     </thead>
 
-    <tr ng-repeat="(key, wedstrijd) in wedstrijden | orderByPriority | orderBy:'date'">
+    <tr ng-repeat="wedstrijd in wedstrijden | orderByPriority | orderBy:'date'">
       <td>{{wedstrijd.ploeg1.naam}} - {{wedstrijd.ploeg2.naam}}</td>
       <td>
         <span style="width: 120px;" class="input-group">
-            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="wedstrijd.date" is-open="opened[key]" datepicker-options="dateOptions" show-button-bar="false" />
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="open($event, key)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
+          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="wedstrijd.date" is-open="opened[wedstrijd.$id]" datepicker-options="dateOptions" show-button-bar="false" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open($event, wedstrijd.$id)"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
+        </span>
       </td>
       <td>
-          <form class='form-inline'>
-        <input min='0' max='24' ng-model="wedstrijd.hour" class='form-control voorspelling' type='number'/>
-        :<input min='0' max='60' ng-model="wedstrijd.minute" class='form-control voorspelling' type='number'/>
-          </form>
+        <form class='form-inline'>
+          <input min='0' max='24' ng-model="wedstrijd.hour" class='form-control voorspelling' type='number'/>
+          :<input min='0' max='60' ng-model="wedstrijd.minute" class='form-control voorspelling' type='number'/>
+        </form>
       </td>
       <td>
         <div class="checkbox-inline">
@@ -48,20 +48,19 @@
         </div>
       </td>
       <td>
-        <a href=''><span class="glyphicon glyphicon-trash" ng-click="verwijder(key)"></span></a><br>
+        <a><span class="glyphicon glyphicon-trash" ng-click="verwijder(wedstrijd.$id)"></span></a><br>
       </td>
     </tr>
   </table>
-</div>
-<br>
+  <br>
 
 
-<form class='form-inline'>
-  Wedstrijd toevoegen:
-  <select class='form-control' ng-model="newWedstrijd.ploeg1" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'></select>
-  -
-  <select class='form-control' ng-model="newWedstrijd.ploeg2" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'></select>
-  <button ng-click="voegToe()" class="btn btn-default">Add</button>
-</form>
-<br>
+  <form class='form-inline'>
+    Wedstrijd toevoegen:
+    <select class='form-control' ng-model="newWedstrijd.ploeg1" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'></select>
+    -
+    <select class='form-control' ng-model="newWedstrijd.ploeg2" ng-options='ploeg.naam for ploeg in ploegen | orderByPriority'></select>
+    <button ng-click="voegToe()" class="btn btn-default">Add</button>
+  </form>
+  <br>
 </div>
