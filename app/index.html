@@ -27,8 +27,18 @@
         <ul class="nav nav-pills pull-right">
           <li ng-class="{'active': curTab === 'main'}"><a ng-href="#">Home</a></li>
           <li ng-class="{'active': curTab === 'personen'}"><a ng-href="#/personen">Voorspellingen</a></li>
-          <li ng-show="isAdmin()" class="dropdown" ng-class="{'active': curTab === 'wedstrijden' || curTab === 'ploegen' || curTab === 'opties'}">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
+          <!--          <li is-open="status.isopen" ng-show="isAdmin()" dropdown ng-class="{'active': curTab === 'wedstrijden' || curTab === 'ploegen' || curTab === 'opties'}">
+                      <a class="dropdown-toggle" ng-disabled="disabled" data-toggle="dropdown">Admin <span class="caret"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li ng-class="{'active': curTab === 'opties'}"><a ng-href="#/opties">Opties</a></li>
+                        <li ng-class="{'active': curTab === 'wedstrijden'}"><a ng-href="#/wedstrijden">Wedstrijden</a></li>
+                        <li ng-class="{'active': curTab === 'ploegen'}"><a ng-href="#/ploegen">Ploegen</a></li>
+                      </ul>
+                    </li>-->
+          <li ng-show="isAdmin()" class="btn-group" dropdown is-open="status.isopen" ng-class="{'active': curTab === 'wedstrijden' || curTab === 'ploegen' || curTab === 'opties'}">
+            <a href="" type="button" class="dropdown-toggle" ng-disabled="disabled">
+              Admin <span class="caret"></span>
+            </a>
             <ul class="dropdown-menu" role="menu">
               <li ng-class="{'active': curTab === 'opties'}"><a ng-href="#/opties">Opties</a></li>
               <li ng-class="{'active': curTab === 'wedstrijden'}"><a ng-href="#/wedstrijden">Wedstrijden</a></li>
@@ -110,6 +120,7 @@
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
     <script src="bower_components/angularfire/angularfire.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
