@@ -11,8 +11,9 @@ angular.module('poule2App')
   .controller 'MainCtrl', ($scope, $rootScope, $firebase, $firebaseSimpleLogin) ->
     console.log "MainCtrl init"
     $rootScope.curTab = "main"
-    $scope.currentPage = 4
-    $scope.maxItems = 30
+    $scope.currentPage = 1
+    $scope.maxItems = 100
+    $scope.itemsPerPage = 10
     $scope.newChat = {}
     
     $scope.punten = (key_persoon) ->
@@ -38,4 +39,9 @@ angular.module('poule2App')
     (items, scope) ->
       items.sort (a,b) ->
         scope.punten(b.$id) - scope.punten(a.$id)
+  .filter 'pagination', ->
+    (items, scope) ->
+      start = (scope.currentPage-1) * scope.itemsPerPage
+      end = (scope.currentPage-1) * scope.itemsPerPage + scope.itemsPerPage
+      items[start...end]
     

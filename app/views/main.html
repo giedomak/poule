@@ -1,6 +1,4 @@
 <h4>Stand</h4>
-
-<!--<pagination boundary-links="true" total-items="maxItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">ff</pagination>-->
 <div ng-repeat="(key, persoon) in personen | orderByPriority | orderByPunten:this">
   {{key+1+ ": "}}<a ng-href="#/personen/{{persoon.$id}}">{{persoon.naam}}</a>: {{punten(persoon.$id)}}
 </div>
@@ -18,7 +16,8 @@
 </form>
 <br>
 <div ng-show="newChat.bericht && newChat.bericht !== ''" class="fader">{{newChat.naam|| loginObj.user.thirdPartyUserData.first_name}}{{": " + newChat.bericht}}</div>
-<div ng-repeat="chat in chats| orderByPriority | reverse"><a ng-show="chat.id" ng-href="#/personen/{{chat.id}}">{{chat.naam}}</a>{{chat.id?"":chat.naam}}{{": " + chat.bericht}}</div>
+<div ng-repeat="chat in chats| orderByPriority | reverse | pagination:this"><a ng-show="chat.id" ng-href="#/personen/{{chat.id}}">{{chat.naam}}</a>{{chat.id?"":chat.naam}}{{": " + chat.bericht}}</div>
+<pagination items-per-page="itemsPerPage" boundary-links="true" total-items="(chats | orderByPriority).length" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 <br>
 
 <!--TODO
