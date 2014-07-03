@@ -6,9 +6,9 @@
 
 <h4>Chat</h4>
 <form class="form-inline">
-  <input ng-hide="loginObj.user" class="form-control" type="text" placeholder="Afzender" ng-model="newChat.naam"/>
+  <input maxlength="20" ng-hide="loginObj.user" class="form-control" type="text" placeholder="Afzender" ng-model="newChat.naam"/>
   <div class="input-group">
-    <input class="form-control" type="text" placeholder="Chatbericht" ng-model="newChat.bericht"/>
+    <input maxlength="80" class="form-control" type="text" placeholder="Chatbericht" ng-model="newChat.bericht"/>
     <span class="input-group-btn">
       <button class="btn btn-default" ng-click="addChat()">Send</button>
     </span>
