@@ -12,7 +12,7 @@
         <th></th>
         <th>Datum</th>
         <th>Tijd</th>
-        <th>G</th>
+        <!--<th>G</th>-->
         <th>Uitslag</th>
         <th></th>
       </tr>
@@ -34,13 +34,13 @@
           :<input min='0' max='60' ng-model="wedstrijd.minute" class='form-control voorspelling' type='number'/>
         </form>
       </td>
-      <td>
+<!--      <td>
         <div class="checkbox-inline">
           <label><input type="checkbox" ng-model="wedstrijd.gespeeld"></label>
         </div>
-      </td>
+      </td>-->
       <td>
-        <div ng-show='wedstrijd.gespeeld'>
+        <div ng-show='wedstrijdGespeeld(wedstrijd)'>
           <form class='form-inline'>
             <input min='0' ng-model="wedstrijd.scorePloeg1" class='form-control voorspelling' style='width: 70px;' type='number'/> - 
             <input min='0' ng-model="wedstrijd.scorePloeg2" class='form-control voorspelling' style='width: 70px;' type='number'/>

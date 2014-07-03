@@ -46,7 +46,7 @@ angular.module('poule2App')
           initVoorspelling $scope.selected, wed_id for foo, wed_id of $rootScope.wedstrijden.$getIndex()
       
     $scope.canChange = (wedstrijd) ->
-      $rootScope.loginObj.user and $scope.selected and parseInt($rootScope.loginObj.user.id) is parseInt($scope.selected) and !wedstrijd.gespeeld
+      $rootScope.loginObj.user and $scope.selected and parseInt($rootScope.loginObj.user.id) is parseInt($scope.selected) and !$rootScope.wedstrijdGespeeld(wedstrijd)
     
     $scope.verwijder = () ->
       console.log "persoon verwijderen"
@@ -55,7 +55,7 @@ angular.module('poule2App')
       $rootScope.selectedPersoon = null
       
     $scope.puntenWedstrijd = (key, wedstrijd) ->
-      if $scope.selected && wedstrijd.gespeeld && $scope.voorspellingIsSet $scope.selected, key
+      if $scope.selected && $rootScope.wedstrijdGespeeld(wedstrijd) && $scope.voorspellingIsSet $scope.selected, key
         return $rootScope.punten(wedstrijd, $rootScope.personen[$scope.selected].voorspellingen[key])
       else 
         return 0

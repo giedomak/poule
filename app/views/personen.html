@@ -26,7 +26,7 @@
     <tr ng-repeat="wedstrijd in wedstrijden | orderByPriority | orderBy:'date'">
       <td>{{wedstrijd.ploeg1.naam}} - {{wedstrijd.ploeg2.naam}}</td>
       <td>
-        <div ng-show="wedstrijd.gespeeld">
+        <div ng-show="wedstrijdGespeeld(wedstrijd)">
           {{wedstrijd.scorePloeg1 + " - " + wedstrijd.scorePloeg2}}
         </div>
       </td>
@@ -40,7 +40,7 @@
         </form>
       </td>
       <td>
-        <div ng-show="wedstrijd.gespeeld">{{ "+"+puntenWedstrijd(wedstrijd.$id, wedstrijd)}}</div>
+        <div ng-show="wedstrijdGespeeld(wedstrijd)">{{ "+"+puntenWedstrijd(wedstrijd.$id, wedstrijd)}}</div>
       </td>
     </tr>
   </table>

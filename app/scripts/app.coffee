@@ -49,6 +49,7 @@ angular
     $rootScope.personen = {}
     $rootScope.wedstrijden = {}
     $rootScope.chats = {}
+    $rootScope.opties = {}
     
     #firebase bindings
     $rootScope.ploegenRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/ploegen")
@@ -62,6 +63,9 @@ angular
     
     $rootScope.chatsRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/chats")
     $rootScope.chatsRef.$bind($rootScope,"chats")
+    
+    $rootScope.optiesRef = $firebase(new Firebase "https://resplendent-fire-2516.firebaseio.com/opties")
+    $rootScope.optiesRef.$bind($rootScope,"opties")
 
     #set loading to false
     $rootScope.wedstrijdenRef.$on("loaded", () ->
@@ -82,9 +86,8 @@ angular
       if correct(wedstrijd, voorspelling) then return 10
       if gelijk(wedstrijd, voorspelling) then return 7
       points = 0
-      if winst(wedstrijd, voorspelling) 
-        points = 5
-        if doelpuntCorrect(wedstrijd, voorspelling) then return points += 2
+      if winst(wedstrijd, voorspelling) then points = 5
+      if doelpuntCorrect(wedstrijd, voorspelling) then return points += 2
       return points
     
     winst = (wedstrijd, voorspelling) ->
@@ -125,6 +128,26 @@ angular
     $rootScope.isAdmin = () ->
       if $rootScope.loginObj.user and $rootScope.personenRefLoaded
         return $rootScope.personen[$rootScope.loginObj.user.id].role is 'admin' 
+    
+    $rootScope.wedstrijdGespeeld = (wedstrijd) ->
+#      wedstrijd = $rootScope.wedstrijden[key]
+      now = new Date
+      wedstrijddate = new Date(wedstrijd.date)
+      
+      if now.getYear() > wedstrijddate.getYear() then return true
+      
+      if now.getMonth() > wedstrijddate.getMonth() then return true
+      
+      if now.getDay() > wedstrijddate.getDay() then return true
+      
+      if (now.getDay() is (wedstrijddate.getDay()))
+        if now.getHours() > wedstrijd.hour then return true
+      
+        if now.getHours() is wedstrijd.hour
+          if now.getMinutes() >= wedstrijd.minute
+            return true
+            
+      return false
     
   .filter 'reverse', ->
     (items) ->

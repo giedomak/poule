@@ -3,5 +3,19 @@
 </div>
 
 <div ng-show="isAdmin()">
-  Opties
+  <table class="table table-striped">
+<!--    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>-->
+
+    <tr>
+      <td>Aantal minuten voor een wedstrijd dat de voorspelling nog gewijzigd kan worden</td>
+      <td>
+        <input min='0' ng-model="opties.minutenVerandering" class='form-control voorspelling' type='number'/>
+      </td>
+    </tr>
+  </table>
 </div>

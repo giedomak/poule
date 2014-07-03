@@ -19,7 +19,7 @@ angular.module('poule2App')
     $scope.punten = (key_persoon) ->
       $punten = 0
       for key_voorspelling, voorspelling of $rootScope.personen[key_persoon].voorspellingen# when voorspelling.score1
-        for key_wedstrijd, wedstrijd of $rootScope.wedstrijden when wedstrijd.gespeeld #only gespeelde wedstrijden
+        for key_wedstrijd, wedstrijd of $rootScope.wedstrijden when $rootScope.wedstrijdGespeeld(wedstrijd) #only gespeelde wedstrijden
           if key_voorspelling == key_wedstrijd
             $punten += $rootScope.punten(wedstrijd, voorspelling)
             
