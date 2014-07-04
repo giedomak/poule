@@ -24,6 +24,16 @@ angular.module('poule2App')
       $scope.newWedstrijd.ploeg2 = $filter('orderByPriority')($rootScope.ploegen)[0]
     )
     
+    $scope.changeHours = (wedstrijd) ->
+      temp = new Date $rootScope.wedstrijden[wedstrijd.$id].date
+      temp.setHours(wedstrijd.hour)
+      $rootScope.wedstrijden[wedstrijd.$id].date = temp.toJSON()
+    
+    $scope.changeMinutes = (wedstrijd) ->
+      temp = new Date $rootScope.wedstrijden[wedstrijd.$id].date
+      temp.setMinutes(wedstrijd.minute)
+      $rootScope.wedstrijden[wedstrijd.$id].date = temp.toJSON()
+    
     $scope.verwijder = (key) ->
       $rootScope.wedstrijdenRef.$remove(key)
     

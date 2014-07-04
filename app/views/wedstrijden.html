@@ -30,8 +30,8 @@
       </td>
       <td>
         <form class='form-inline'>
-          <input min='0' max='24' ng-model="wedstrijd.hour" class='form-control voorspelling' type='number'/>
-          :<input min='0' max='60' ng-model="wedstrijd.minute" class='form-control voorspelling' type='number'/>
+          <input min='0' max='23' ng-model="wedstrijd.hour" ng-change="changeHours(wedstrijd)" class='form-control voorspelling' type='number'/>
+          :<input min='0' max='59' ng-model="wedstrijd.minute" ng-change="changeMinutes(wedstrijd)" class='form-control voorspelling' type='number'/>
         </form>
       </td>
 <!--      <td>
