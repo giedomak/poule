@@ -134,20 +134,22 @@ angular
       now = new Date
       wedstrijddate = new Date(wedstrijd.date)
       
-      if now.getYear() > wedstrijddate.getYear() then return true
+      return now.getTime() >= wedstrijddate.getTime()
       
-      if now.getMonth() > wedstrijddate.getMonth() then return true
-      
-      if now.getDay() > wedstrijddate.getDay() then return true
-      
-      if (now.getDay() is (wedstrijddate.getDay()))
-        if now.getHours() > wedstrijd.hour then return true
-      
-        if now.getHours() is wedstrijd.hour
-          if now.getMinutes() >= wedstrijd.minute
-            return true
-            
-      return false
+#      if now.getYear() > wedstrijddate.getYear() then return true
+#      
+#      if now.getMonth() > wedstrijddate.getMonth() then return true
+#      
+#      if now.getDay() > wedstrijddate.getDay() then return true
+#      
+#      if (now.getDay() is (wedstrijddate.getDay()))
+#        if now.getHours() > wedstrijd.hour then return true
+#      
+#        if now.getHours() is wedstrijd.hour
+#          if now.getMinutes() >= wedstrijd.minute
+#            return true
+#            
+#      return false
     
   .filter 'reverse', ->
     (items) ->
